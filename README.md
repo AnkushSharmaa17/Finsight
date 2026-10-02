@@ -1,0 +1,29 @@
+# FinSight
+
+**Understand your money in one picture.**
+
+FinSight is an India-first personal finance web app. You add your income,
+expenses, liabilities, assets, investments and goals, and it calculates your
+monthly surplus, savings rate, debt-service ratio, emergency-fund cover and
+net worth. It then explains the results in a readable report and lets you
+test what-if scenarios without touching your real data.
+
+## Highlights
+
+- **Deterministic finance engine**: all numbers come from tested code, not the LLM
+- **Explainable metrics**: every result traces back to a formula and its inputs
+- **Immutable snapshots**: reports stay reproducible even after you edit your data
+- **Scenario simulator**: baseline vs what-if comparison, never mutates stored records
+- **AI narrative with fallback**: Gemini writes the summary; a rules-based summary is used if it's unavailable
+- **Privacy by design**: no bank passwords or PINs, data export and account deletion built in
+- **SEO-ready public pages**: calculators, guides, FAQ, sitemap and structured data
+
+## Tech stack
+
+Next.js 14 (App Router) · TypeScript · Tailwind CSS · Node.js + Express ·
+MongoDB Atlas (Mongoose) · Zod · JWT cookie auth with Argon2id · Gemini API (optional)
+
+## Disclaimer
+
+FinSight provides educational planning information and illustrative scenarios.
+It is not investment, tax or legal advice and does not recommend specific securities.
