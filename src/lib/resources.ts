@@ -20,4 +20,19 @@ export const RESOURCES: Record<string, Resource> = {
   goals: { key: 'goals', endpoint: 'goals', title: 'Goals', singular: 'goal', hint: 'Each goal needs a target amount and date.', columns: ['name', 'category', 'targetAmountMinor', 'currentAmountMinor', 'targetDate'],
     fields: [{ name: 'name', label: 'Goal name', type: 'text', required: true }, { name: 'category', label: 'Category', type: 'select', options: opts('emergency', 'retirement', 'house', 'education', 'travel', 'wedding', 'custom') }, { name: 'targetAmountMinor', label: 'Target (₹)', type: 'money', required: true }, { name: 'currentAmountMinor', label: 'Saved so far (₹)', type: 'money' }, { name: 'monthlyContributionMinor', label: 'Monthly contribution (₹)', type: 'money' }, { name: 'targetDate', label: 'Target date', type: 'date', required: true }, { name: 'expectedReturnPct', label: 'Assumed annual return (%)', type: 'number' }, { name: 'priority', label: 'Priority (1 to 10)', type: 'number' }] },
 };
+
 export const FINANCIAL_TYPES = ['income', 'expenses', 'liabilities', 'assets', 'investments'] as const;
+
+/* ────────────────────────────────────────────────────────────────── */
+/*  Lookup helpers — added to avoid repeating the type-guard dance    */
+/* ────────────────────────────────────────────────────────────────── */
+
+export type FinancialType = (typeof FINANCIAL_TYPES)[number];
+
+/** Type guard: narrows a string to a valid FinancialType. */
+export const isFinancialType = (type: string): type is FinancialType =>
+  (FINANCIAL_TYPES as readonly string[]).includes(type);
+
+/** Type-safe lookup. Returns undefined for unknown/invalid types. */
+export const getResource = (type: string): Resource | undefined =>
+  isFinancialType(type) ? RESOURCES[type] : undefined;

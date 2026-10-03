@@ -14,3 +14,96 @@
   .label { @apply mb-1 block text-sm font-medium; }
   .panel { @apply rounded-lg border border-line bg-white p-5; }
 }
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes bounceDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: .4; }
+  30%           { transform: translateY(-5px); opacity: 1; }
+}
+
+/* markdown output inside chat bubbles */
+.fs-md p      { margin: 0.6em 0; }
+.fs-md p:first-child { margin-top: 0; }
+.fs-md p:last-child  { margin-bottom: 0; }
+.fs-md h3     { margin: 1em 0 0.35em; font-size: 0.95rem; font-weight: 700; color: #13283C; }
+.fs-md h3:first-child { margin-top: 0; }
+.fs-md ul     { margin: 0.5em 0; padding-left: 1.1em; list-style: disc; }
+.fs-md li     { margin: 0.2em 0; }
+.fs-md strong { color: #145B43; font-weight: 700; }
+.fs-md code   { background: #E7EEEC; padding: 1px 5px; border-radius: 5px; font-size: 0.85em; }
+.fs-md em     { font-style: italic; opacity: 0.85; }
+/* ============================================================
+   PRINT / PDF EXPORT
+   ============================================================ */
+@media print {
+  /* Remove chrome: nav, sidebars, breadcrumbs, buttons */
+  header.topbar,
+  aside,
+  nav,
+  .no-print,
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  /* Force white background, black text */
+  html, body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  /* Keep brand colors when printing */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Page geometry */
+  @page {
+    size: A4;
+    margin: 16mm 14mm;
+  }
+
+  /* Neutralise animations & shadows */
+  * {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+
+  /* The printed container */
+  .print-root {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Prevent cards from splitting across pages */
+  .print-root section,
+  .print-root li,
+  .print-root header {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Soft borders so cards still read */
+  .print-root [class*="border-line"] {
+    border-color: #d9d9d9 !important;
+  }
+
+  /* Preserve subtle tinted backgrounds */
+  .print-root [class*="bg-mist"] {
+    background: #f6f8f7 !important;
+  }
+
+  /* Larger heading contrast for print */
+  .print-root h1 { font-size: 22pt !important; }
+  .print-root h2 { font-size: 14pt !important; }
+  .print-root p,
+  .print-root li { font-size: 10.5pt !important; }
+
+  /* Kill the sticky save bar if it exists on any page */
+  .sticky { position: static !important; }
+}
